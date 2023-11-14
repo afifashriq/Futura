@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>Futura | Ecommerce Website Design</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="main.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html"><img src="images/futuralogo.png" width="125px"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="products.html">Product</a></li>
+                    <li><a href="">About</a></li>
+                    <li><a href="">Contact</a></li>
+                    <li><a href="account.html">Account</a></li>
+                </ul>
+            </nav>
+            <a href="cart.html"><img src="images/cart.png" width="30px" height="30px"></a>
+            <img src="images/menu.png" class="menu-icon" onclick="menutoggle()">
+        </div>
+       
+    </div>
+</div>
+
+<!------ cart items details -------->
+
+<div class="container">
+    <div class="navbar">
+        <!-- Your navigation menu ... -->
+    </div>
+</div>
+
+<div class="small-container cart-page">
+    <h2>Your Cart</h2>
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+        </tr>
+        <!-- Empty cart initially -->
+    </table>
+    
+    <div class="total-price">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td>RM 0.00</td>
+            </tr>
+            <tr>
+                <td>Tax</td>
+                <td>RM 0.00</td>
+            </tr>
+            <tr>
+                <td>Total</td>
+                <td>RM 0.00</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="checkout-button-container">
+        <button class="checkout-button" onclick="handleCheckout()">Checkout</button>
+    </div>
+    
+    <div id="emptyCartMessage" style="display: none; text-align: center;">
+        Your cart is empty. Please add products from the <a href="product-details-1.html">Products page</a>.
+    </div>
+</div>
+
+</div>
+
+
+    <!--------- footer ------->
+
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col-1">
+                        <h3>Download Our App</h3>
+                        <p>Download App for Android and Ios mobile phone</p>
+                        <div class="app-logo">
+                            <img src="images/play-store.png">
+                            <img src="images/app-store.png">
+                        </div>
+                    </div>
+                    <div class="footer-col-2">
+                        <img src="images/futuralogo.png">
+                        <p>Our Purpose Is Sustainably Make the Pleasure and
+                        Benefits of Gig Show Accessible to the Many.</p>
+                    </div>
+                    <div class="footer-col-3">
+                        <h3>Useful Links</h3>
+                        <ul>
+                            <li>Coupons</li>
+                            <li>Blog Post</li>
+                            <li>Return Policy</li>
+                            <li>Join Affiliate</li>
+                        </ul>
+                    </div>
+                    <div class="footer-col-4">
+                        <h3>Follow Us</h3>
+                        <ul>
+                            <li><a href="https://www.tiktok.com/@futuraband">Tiktok</a></li>
+                            <li><a href="https://twitter.com/futurabandmy">Twitter</a></li>
+                            <li><a href="https://www.instagram.com/futurabandmy">Instagram</a></li>
+                            <li><a href="https://www.youtube.com/@futurabandmy">Youtube</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+                <p class="copyright">Copyright 2023 - Futura</p>
+            </div>
+        </div>
+<!----------js for toggle menu---------->
+      
+<script>
+     var MenuItems = document.getElementById("MenuItems");
+
+MenuItems.style.maxHeight = "0px";
+
+function menutoggle(){
+    if( MenuItems.style.maxHeight == "0px")
+    {
+        MenuItems.style.maxHeight = "200px";
+    }
+    else
+    {
+        MenuItems.style.maxHeight = "0px";
+    }
+}
+
+  // Function to load cart items on page load
+  window.onload = function () {
+        loadCartItems();
+    };
+
+    function loadCartItems() {
+        var cartTable = document.querySelector(".cart-page table");
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        for (var i = 0; i < cart.length; i++) {
+            var productName = cart[i].name;
+            var productPrice = cart[i].price;
+            var productQuantity = cart[i].quantity;
+
+            var cartItem = document.createElement("div");
+            cartItem.className = "cart-info";
+            cartItem.innerHTML = `
+                <img src="images/buy-1.jpg">
+                <div>
+                    <p>${productName}</p>
+                    <small>Price: RM${productPrice.toFixed(2)}</small>
+                    <br>
+                    <a href="#" onclick="removeFromCart(this)">Remove</a>
+                </div>
+            `;
+
+            var quantityInput = document.createElement("input");
+            quantityInput.type = "number";
+            quantityInput.value = productQuantity;
+            cartItem.appendChild(quantityInput);
+
+            var subtotal = document.createElement("div");
+            subtotal.innerHTML = `RM${(productPrice * productQuantity).toFixed(2)}`;
+            cartItem.appendChild(subtotal);
+
+            var newRow = cartTable.insertRow(cartTable.rows.length);
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+            var cell3 = newRow.insertCell(2);
+            cell1.appendChild(cartItem);
+            cell2.appendChild(quantityInput);
+            cell3.appendChild(subtotal);
+        }
+
+        // Update the total price
+        updateTotalPrice();
+    }
+
+    // Function to remove item from cart
+    function removeFromCart(linkElement) {
+        var row = linkElement.closest("tr");
+        row.remove();
+
+        // Get the product name for removal
+        var productName = linkElement.parentElement.querySelector("p").textContent;
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        // Remove the item from the cart based on the product name
+        var updatedCart = cart.filter(function (item) {
+            return item.name !== productName;
+        });
+
+        // Update the cart in localStorage
+        localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+        // Recalculate and update the total price
+        updateTotalPrice();
+    }
+
+    // Function to update the total price
+    function updateTotalPrice() {
+        var cart = JSON.parse(localStorage.getItem("cart")) || [];
+        var subtotal = 0;
+
+        for (var i = 0; i < cart.length; i++) {
+            var productPrice = cart[i].price;
+            var productQuantity = cart[i].quantity;
+
+            subtotal += productPrice * productQuantity;
+        }
+
+        document.querySelector(".total-price td:nth-child(2)").textContent = `RM ${subtotal.toFixed(2)}`;
+    }
+
+    // Function to handle checkout
+    function handleCheckout() {
+        // Check if the cart is empty
+        var cartTable = document.querySelector(".cart-page table");
+        var emptyCartMessage = document.getElementById("emptyCartMessage");
+
+        if (cartTable.rows.length <= 1) {
+            emptyCartMessage.style.display = "block";
+            return;
+        }
+
+        // Add your logic for handling checkout (e.g., sending data to the server)
+        // You can use AJAX to send data to a PHP script for further processing
+    }
+
+    // Function to handle checkout
+    function handleCheckout() {
+            // Check if the cart is empty
+            var cartTable = document.querySelector(".cart-page table");
+            var emptyCartMessage = document.getElementById("emptyCartMessage");
+
+            if (cartTable.rows.length <= 1) {
+                emptyCartMessage.style.display = "block";
+                return;
+            }
+
+    }
+</script>
+
+</body>
+</html>
