@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
     
     if ($conn->query($sql) === TRUE) {
-        echo "Registration successful!";
+        echo "Registration Successful!";
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
@@ -26,12 +26,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Close the database connection
 $conn->close();
 ?>
-
-<!-- HTML registration form -->
-<form action="register.php" method="post">
-    <!-- Include registration form fields (username, email, password) -->
-    <input type="text" name="username" placeholder="Username" required>
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit" class="btn">Register</button>
-</form>

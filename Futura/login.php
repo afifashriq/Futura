@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Authentication successful
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['username'] = $row['username'];
-            echo "Login successful!";
+            echo "Login Successful!";
         } else {
             echo "Incorrect password!";
         }
@@ -39,11 +39,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 // Close the database connection
 $conn->close();
 ?>
-
-<!-- HTML login form -->
-<form action="login.php" method="post">
-    <!-- Include login form fields (email, password) -->
-    <input type="email" name="email" placeholder="Email" required>
-    <input type="password" name="password" placeholder="Password" required>
-    <button type="submit" class="btn">Login</button>
-</form>

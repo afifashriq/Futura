@@ -14,7 +14,9 @@
 	  $items[] = $row['ItemQty'];
 	}
 	$allItems = implode(', ', $items);
+  
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -108,6 +110,7 @@
           </div>
           <div class="form-group">
             <input type="submit" name="submit" value="Place Order" class="btn btn-danger btn-block">
+            <p>If you are an admin, <a href="admin_login.php">click here to login</a>.</p>
           </div>
         </form>
       </div>
